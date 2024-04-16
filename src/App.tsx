@@ -1,15 +1,18 @@
 import Map from "./components/Map";
+import { useState } from "react";
 import LocationSearch from "./components/LocationSearch";
 import type { Place } from "./api/Place";
 
 function App() {
+  const [place, setPLace] = useState<Place | null>(null);
+
   return (
     <div className="h-screen w-screen grid grid-cols-12">
       <div className="col-span-3 p-2">
         <LocationSearch />
       </div>
       <div className="col-span-9">
-        <Map />
+        <Map place={place} />
       </div>
     </div>
   );
