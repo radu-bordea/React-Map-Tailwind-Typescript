@@ -8,4 +8,6 @@
 - copy <<content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],>> in tailwind.config.js
 - copy @tailwind base; @tailwind components; @tailwind utilities; in index.css
 
-// commands
+// commands for using Map
+- npm install @types/leaflet leaflet react-leaflet
+

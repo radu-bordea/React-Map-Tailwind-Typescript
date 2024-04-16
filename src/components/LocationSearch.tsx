@@ -1,7 +1,7 @@
 // Importing necessary modules and types from React and other files.
 import { Fragment, useState } from "react";
-import type { Place } from "../api/Place"; // Importing the Place type from the specified location.
-import { search } from "../api/search"; // Importing the search function from the specified location.
+import type { Place } from "../api/Place";
+import { search } from "../api/search";
 
 // Defining props interface for LocationSearch component.
 interface LocationSearchProps {
@@ -18,25 +18,31 @@ export default function LocationSearch({ onPlaceClick }: LocationSearchProps) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // Preventing default form submission behavior.
 
-    // Performing search using the entered term and updating the state with the results.
-    const results = await search(term);
-    setPlaces(results);
+    try {
+      // Performing search using the entered term and updating the state with the results.
+      const results = await search(term);
+      setPlaces(results);
+    } catch (error) {
+      console.error("Error occurred during search:", error);
+      // Handle error: display an error message to the user
+    }
   };
 
   // Rendering the LocationSearch component.
   return (
     <div>
       {/* Search form */}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} >
         <label className="font-bold" htmlFor="term">
           Search
         </label>
         <input
           type="text"
-          className="border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 px-4 py-2 w-full"
+          className="border border-gray-300 bg-blue-100 text-gray-700 rounded-md shadow-sm focus:border-indigo-500 px-4 py-2 w-full"
           id="term"
           value={term}
           onChange={(e) => setTerm(e.target.value)}
+          aria-label="Search Term"
         />
       </form>
 
